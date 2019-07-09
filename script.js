@@ -117,8 +117,7 @@ function displayCoinNews(responseJson) {
     $('#js-coinGeckoWidget').append(
             `<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
             <coingecko-coin-price-chart-widget currency="usd" coin-id="${searchCoin}" locale="en" height="300">
-            </coingecko-coin-price-chart-widget>`)
-            
+            </coingecko-coin-price-chart-widget>`)     
     $('#js-coinNews').append(`<h2>${searchCoin} News Articles</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 15; i++) {
         $('#results-list').append(
@@ -193,6 +192,7 @@ getCoinRanking();
 
 //clear or empty out the DOM for new content
 function emptyContainers() {
+    $('.homeButton').remove()
     $('#js-coinGeckoWidget').empty()
     $('#js-coinNews').empty()
     $('#js-coinRankContainer').empty()
