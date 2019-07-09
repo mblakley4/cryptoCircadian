@@ -3,17 +3,21 @@
     font-family: 'Helvetica Neue', sans-serif;
 }
 
-h1 {
+h1, h2 {
     text-align: center;
 }
 
 .searchContainer {
     text-align: center;
+    padding: 5px;
+    margin: 10px;
 }
 
-.coinRankContainer {
+/* styling for home page coin rankings */
+
+/* .coinRankContainer {
     text-align: center;
-}
+} */
 
 .coinRankContainer ul {
     list-style: none;
@@ -37,13 +41,11 @@ h1 {
     display: inline-block;
     border: 1px solid black;
     border-radius: 5px;
-    min-width: 300px;
-    width: auto;
+    width: 300px;
 }
 
 .rankNumber {
-    text-align: start;
-    vertical-align: 50%;
+    text-align: left;
     font-size: 36px;
     font-weight: bold;
     margin: 10px;
@@ -51,6 +53,8 @@ h1 {
 
 .coinLink {
     color: blue;
+    padding: 15px;
+    margin: 15px 0px;
 }
 
 .coinLink:hover,
@@ -67,7 +71,7 @@ h1 {
 .Row2 {
     display: inline-block;
     text-align: center;
-    padding: 5px;
+    padding: 15px;
 }
 
 .bottom-row-container {
@@ -86,5 +90,46 @@ h1 {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+    }
+    .coinTile {
+        width: 400px;
+    }
+}
+
+
+
+/* styling for news articles */
+
+.articleImage {
+    height: 150px;
+    width: 250px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.coinNews ul {
+    list-style: none;
+    padding: 0px 25px 0px 25px;
+}
+
+.newsTile {
+    padding: 10px;
+}
+
+.newsTitle {
+    font-size: 18px;
+    padding: 5px;
+    max-width: 600px;
+}
+
+.articleDescription {
+    padding: 5px;
+    max-width: 700px;
+}
+
+@media (min-width: 900px) {
+    .row {
+        display: inline-block;
+        vertical-align: top;
     }
 }

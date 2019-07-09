@@ -34,26 +34,40 @@ function getCoinRanking() {
     dataComms(url, rankingDisplayID);
 }
 
+//function to round numbers to 2 digits
+function roundToTwo(num) {
+    return num = Math.round(num * 100) / 100;
+    console.log('num = ' + num);
+} 
+
 function displayCoinRanking(responseJson) {
     console.log('displayCoinRanking ran');
     console.log(responseJson);
     emptyContainers();
     $('#js-coinRankContainer').append(`<h2>Top 10 Coins</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 10; i++) {
-        //add variables to format responseJson values, then call variables to append
+        //variables to format responseJson values
+        let coinName = `${responseJson[i].id}`.toUpperCase();
+        let coinSymbol = `${responseJson[i].symbol}`.toUpperCase();
+        let currentPrice = roundToTwo(`${responseJson[i].current_price}`);
+        let percentChange = roundToTwo(`${responseJson[i].price_change_percentage_24h}`);
+        // add function to evaluate mktCap & totalVol and return 4 digit numbers with appropriate label
+        // let mktCap = 
+        // let totalVol = 
+        
         $('#results-list').append(
             `<li>
                 <div class="rankNumber">#${responseJson[i].market_cap_rank}</div>
                 <div class="coinTile">
                     <img src="${responseJson[i].image}" class="coinLogo Row1">
                     <div class="Row1">
-                        <h3 onClick="coinLinkClicked('${responseJson[i].id}')" class="coinLink" id="${responseJson[i].id}">${responseJson[i].id} (${responseJson[i].symbol})</h3>
-                        <h4 class="coinPrice">${responseJson[i].current_price} USD</h4>
+                        <h3 onClick="coinLinkClicked('${coinName}')" class="coinLink" id="${coinName}">${coinName} (${coinSymbol})</h3>
+                        <h4 class="coinPrice">${currentPrice} USD</h4>
                     </div>
                     <div class="bottom-row-container">
                         <div class="Column1 Row2">
                             <h5>24H%</h5>
-                            <h5 class="priceChange">${responseJson[i].price_change_percentage_24h}</h5>
+                            <h5 class="priceChange">${percentChange}</h5>
                         </div>
                         <div class="Column2 Row2">
                                 <h5>MKT CAP</h5>
@@ -99,6 +113,7 @@ function getCoinNews() {
 function displayCoinNews(responseJson) {
     console.log('displayCoinNews ran');
     console.log(responseJson);
+    $('#js-form').append('<input class="homeButton" type="button" value="  Home  " onClick="location.reload()"></input>')
     $('#js-coinGeckoWidget').append(
             `<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
             <coingecko-coin-price-chart-widget currency="usd" coin-id="${searchCoin}" locale="en" height="300">
@@ -109,16 +124,18 @@ function displayCoinNews(responseJson) {
         $('#results-list').append(
             `<li>
                 <div class="newsTile">
-                    <a target="_blank" href="${responseJson.articles[i].url}" class="article-image">
-                        <img src="${responseJson.articles[i].urlToImage}" class="tileImage">
+                    <a target="_blank" href="${responseJson.articles[i].url}">
+                        <img src="${responseJson.articles[i].urlToImage}" class="articleImage row">
                     </a>
-                    <div class="newsTitle">
+                    <div class="row">
+                        <div class="newsTitle">
                             <a target="_blank" href="${responseJson.articles[i].url}">${responseJson.articles[i].title}</a>
-                    </div>
-                    <div class="articleDescription">
-                        ${responseJson.articles[i].description}
+                        </div>
+                        <div class="articleDescription">${responseJson.articles[i].description}
+                        </div>
                     </div>
                 </div>
+                <hr />
             </li>`
         )
     }
