@@ -17,10 +17,12 @@ function formatQueryParams(params) {
     return queryItems.join('&');
 }
 
+//get the homepage display of ranked coins from the CoinGecko API
 function getCoinRanking() {
     console.log('getCoinRanking ran');
     const rankingDisplayID = 1;
    
+    //API parameters
     const params = {
         vs_currency: 'usd',
     }
@@ -38,27 +40,28 @@ function displayCoinRanking(responseJson) {
     emptyContainers();
     $('#js-coinRankContainer').append(`<h2>Top 10 Coins</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 10; i++) {
+        //add variables to format responseJson values, then call variables to append
         $('#results-list').append(
             `<li>
-                <div class="rankNumber">${responseJson[i].market_cap_rank}</div>
+                <div class="rankNumber">#${responseJson[i].market_cap_rank}</div>
                 <div class="coinTile">
+                    <img src="${responseJson[i].image}" class="coinLogo Row1">
                     <div class="Row1">
-                        <img src="${responseJson[i].image}">
-                        <h3><a href="${responseJson[i].id}">${responseJson[i].id} (${responseJson[i].symbol})</a></h3>
-                        <h4>${responseJson[i].current_price} USD</h4>
+                        <h3 onClick="coinLinkClicked('${responseJson[i].id}')" class="coinLink" id="${responseJson[i].id}">${responseJson[i].id} (${responseJson[i].symbol})</h3>
+                        <h4 class="coinPrice">${responseJson[i].current_price} USD</h4>
                     </div>
-                    <div class="Row2">
-                        <div class=Column1>
+                    <div class="bottom-row-container">
+                        <div class="Column1 Row2">
                             <h5>24H%</h5>
-                            <h5>${responseJson[i].price_change_percentage_24h}</h5>
+                            <h5 class="priceChange">${responseJson[i].price_change_percentage_24h}</h5>
                         </div>
-                        <div class=Column2>
-                                <h5>MARKET CAP</h5>
-                                <h5>${responseJson[i].market_cap}</h5>
+                        <div class="Column2 Row2">
+                                <h5>MKT CAP</h5>
+                                <h5 class="mktCap">${responseJson[i].market_cap}</h5>
                         </div>
-                        <div class=Column3>
+                        <div class="Column3 Row2">
                                 <h5>VOLUME</h5>
-                                <h5>${responseJson[i].total_volume}</h5>
+                                <h5 class="volume">${responseJson[i].total_volume}</h5>
                         </div>
                     </div>  
                 </div>
@@ -67,9 +70,12 @@ function displayCoinRanking(responseJson) {
     }
 }
 
+//get DOM display data from the NewsAPI
 function getCoinNews() {
     console.log('getCoinNews ran');
     const newsDisplayID = 2;
+
+    //newsAPI parameters
     const params = {
         language: 'en',
         sortBy: 'publishedAt',
@@ -89,6 +95,7 @@ function getCoinNews() {
         dataComms(url, newsDisplayID, options);
 }
 
+//display the coinGecko widget with top articles from newsAPI based on user entered coin
 function displayCoinNews(responseJson) {
     console.log('displayCoinNews ran');
     console.log(responseJson);
@@ -96,6 +103,7 @@ function displayCoinNews(responseJson) {
             `<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
             <coingecko-coin-price-chart-widget currency="usd" coin-id="${searchCoin}" locale="en" height="300">
             </coingecko-coin-price-chart-widget>`)
+            
     $('#js-coinNews').append(`<h2>${searchCoin} News Articles</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 15; i++) {
         $('#results-list').append(
@@ -140,21 +148,33 @@ fetch(url, options)
 
 //function to take user input and pass param(s) to API call functions
 function watchForm() {
-$('form').submit(event => {
+    $('form').submit(event => {
+        event.preventDefault();
+        console.log('the form was submitted');
+        searchCoin = $('#js-search-coin').val();
+        emptyContainers();
+        getCoinNews();
+    });
+}
+
+//handles coin titles that are clicked and calls getCoinNews
+function coinLinkClicked(id) {
     event.preventDefault();
-    console.log('the form was submitted');
-    searchCoin = $('#js-search-coin').val();
+    console.log('the user clicked a coin link & ID = ' + id);
+    searchCoin = id;
+    console.log('searchCoin = ' + searchCoin);
     emptyContainers();
     getCoinNews();
-});
 }
 
 // waiting...watching for user form submisions
 $(watchForm);
 
+
 //call the main page API default display
 getCoinRanking();
 
+//clear or empty out the DOM for new content
 function emptyContainers() {
     $('#js-coinGeckoWidget').empty()
     $('#js-coinNews').empty()

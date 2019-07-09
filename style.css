@@ -1,4 +1,90 @@
 * { 
     box-sizing: border-box;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
+h1 {
+    text-align: center;
+}
+
+.searchContainer {
+    text-align: center;
+}
+
+.coinRankContainer {
+    text-align: center;
+}
+
+.coinRankContainer ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.coinRankContainer li {
+    padding: 10px;
+}
+
+.coinLogo {
+    height: 70px;
+    width: 70px;
+    padding: 10px;
+    margin: 10px;
+    float: left;
+}
+
+.coinTile {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 5px;
+    min-width: 300px;
+    width: auto;
+}
+
+.rankNumber {
+    text-align: start;
+    vertical-align: 50%;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.coinLink {
+    color: blue;
+}
+
+.coinLink:hover,
+.coinLink:focus {
+    text-decoration: underline;
+    cursor: pointer;    
+}
+
+.Row1 {
+    display: inline-block;
+    text-align: center;
+}
+
+.Row2 {
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+}
+
+.bottom-row-container {
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid black;
+}
+
+.Column2 {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+@media (min-width: 800px) {
+    .coinRankContainer ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
