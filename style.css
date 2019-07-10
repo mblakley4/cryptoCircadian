@@ -3,6 +3,10 @@
     font-family: 'Helvetica Neue', sans-serif;
 }
 
+body {
+    background-image: linear-gradient(to right, rgb(94, 95, 94, 0.1), rgb(94, 95, 94, 0.9));
+}
+
 h1, h2 {
     text-align: center;
 }
@@ -15,10 +19,6 @@ h1, h2 {
 
 /* styling for home page coin rankings */
 
-/* .coinRankContainer {
-    text-align: center;
-} */
-
 .coinRankContainer ul {
     list-style: none;
     margin: 0 auto;
@@ -26,26 +26,26 @@ h1, h2 {
 }
 
 .coinRankContainer li {
-    padding: 10px;
+    padding: 2px;
 }
 
 .coinLogo {
     height: 70px;
     width: 70px;
     padding: 10px;
-    margin: 10px;
-    float: left;
+    margin: 10px auto;
+    display: block;
 }
 
 .coinTile {
-    display: inline-block;
     border: 1px solid black;
     border-radius: 5px;
-    width: 300px;
+    width: 275px;
+    margin: 0 auto;
 }
 
 .rankNumber {
-    text-align: left;
+    text-align: center;
     font-size: 36px;
     font-weight: bold;
     margin: 10px;
@@ -64,13 +64,11 @@ h1, h2 {
 }
 
 .Row1 {
-    display: inline-block;
     text-align: center;
 }
 
 .Row2 {
     display: inline-block;
-    text-align: center;
     padding: 15px;
 }
 
@@ -78,6 +76,10 @@ h1, h2 {
     display: flex;
     justify-content: space-evenly;
     border-top: 1px solid black;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(rgba(24, 24, 24, 0.1), rgba(24, 24, 24, 0.9));
 }
 
 .Column2 {
@@ -85,7 +87,7 @@ h1, h2 {
     border-left: 1px solid black;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 500px) {
     .coinRankContainer ul {
         display: flex;
         flex-wrap: wrap;
@@ -93,6 +95,19 @@ h1, h2 {
     }
     .coinTile {
         width: 400px;
+    }
+    .Row1 {
+        display: inline-block;
+    }
+    .top-row-container {
+        width: 75%;
+    }
+    .coinLogo {
+        float: left;
+    }
+
+    .bottom-row-container {
+        font-size: 16px;
     }
 }
 

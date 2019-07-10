@@ -60,7 +60,7 @@ function displayCoinRanking(responseJson) {
                 <div class="rankNumber">#${responseJson[i].market_cap_rank}</div>
                 <div class="coinTile">
                     <img src="${responseJson[i].image}" class="coinLogo Row1">
-                    <div class="Row1">
+                    <div class="top-row-container Row1">
                         <h3 onClick="coinLinkClicked('${coinName}')" class="coinLink" id="${coinName}">${coinName} (${coinSymbol})</h3>
                         <h4 class="coinPrice">${currentPrice} USD</h4>
                     </div>
@@ -118,7 +118,7 @@ function displayCoinNews(responseJson) {
             `<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
             <coingecko-coin-price-chart-widget currency="usd" coin-id="${searchCoin}" locale="en" height="300">
             </coingecko-coin-price-chart-widget>`)     
-    $('#js-coinNews').append(`<h2>${searchCoin} News Articles</h2><ul id="results-list"></ul>`)
+    $('#js-coinNews').append(`<h2>${searchCoin} NEWS</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 15; i++) {
         $('#results-list').append(
             `<li>
