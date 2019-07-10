@@ -44,7 +44,7 @@ function displayCoinRanking(responseJson) {
     console.log('displayCoinRanking ran');
     console.log(responseJson);
     emptyContainers();
-    $('#js-coinRankContainer').append(`<h2>Top 10 Coins</h2><ul id="results-list"></ul>`)
+    $('#js-coinRankContainer').append(`<h2>Top 10 Coins by Market Capitalization</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 10; i++) {
         //variables to format responseJson values
         let coinName = `${responseJson[i].id}`.toUpperCase();
@@ -113,7 +113,7 @@ function getCoinNews() {
 function displayCoinNews(responseJson) {
     console.log('displayCoinNews ran');
     console.log(responseJson);
-    $('#js-form').append('<input class="homeButton" type="button" value="  Home  " onClick="location.reload()"></input>')
+    $('#js-form').append('<a class="homeButton" href="#" onClick="location.reload()">Home</a>')
     $('#js-coinGeckoWidget').append(
             `<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
             <coingecko-coin-price-chart-widget currency="usd" coin-id="${searchCoin}" locale="en" height="300">
@@ -167,7 +167,7 @@ function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         console.log('the form was submitted');
-        searchCoin = $('#js-search-coin').val();
+        searchCoin = $('#js-search-coin').val().toUpperCase();
         emptyContainers();
         getCoinNews();
     });

@@ -3,18 +3,97 @@
     font-family: 'Helvetica Neue', sans-serif;
 }
 
+/* html {
+    margin: 0;
+} */
+
 body {
     background-image: linear-gradient(to right, rgb(94, 95, 94, 0.1), rgb(94, 95, 94, 0.9));
 }
 
-h1, h2 {
+.headerPic {
+    width: 100%;
+    height: 200px;
+    max-width: 750px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px black;
+    position: relative;
+}
+
+h1 {
+    color: rgb(247, 147, 26);
+    position: absolute;
+    display: block;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px whitesmoke;
     text-align: center;
+    padding: 15px;
+}
+
+.coinScroll {
+    margin: 10px auto;
+}
+
+.searchBar {
+    position: relative;
+    margin: 0 auto;
+    width: 250px;
+}
+
+.searchBar input[type=image]  {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+}
+
+input[type=text] {
+    background: rgba(32, 30, 30, 0.521);
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 400;
+    width: 250px;
+    height: 35px;
+    border: 3px solid white;
+    padding: 5px;
+}
+
+input[type=text]::-webkit-input-placeholder {
+    color: white;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+input[type=image] {
+    height: 20px;
+    width: 20px;
+}
+
+
+h2 {
+    text-align: center;
+    font-size: 16px;
+    color: #444;
+    font-weight: 400;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+
 }
 
 .searchContainer {
-    text-align: center;
     padding: 5px;
+    margin: 25px;
+}
+
+.homeButton {
+    float: right;
     margin: 10px;
+    color: white;
+    font-weight: 600;
 }
 
 /* styling for home page coin rankings */
@@ -105,10 +184,20 @@ h1, h2 {
     .coinLogo {
         float: left;
     }
-
     .bottom-row-container {
         font-size: 16px;
     }
+    /* header {
+        display: flex;
+    }
+    h1 {
+        order: 1
+    }
+    .headerChain {
+        order: 2;
+        width: 35%
+    } */
+
 }
 
 

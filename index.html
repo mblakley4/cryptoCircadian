@@ -9,15 +9,24 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <header>
+    <img src="https://github.com/mblakley4/cryptoCircadian/blob/master/crypto%20invest.jpg?raw=true" class="headerPic">
+    <!-- <img src="https://github.com/mblakley4/cryptoCircadian/blob/master/chain.jpg?raw=true" class="headerPic"> -->
     <h1>The Crypto Circadian</h1>
+    <div class="coinScroll">
+            <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
+            <coingecko-coin-price-marquee-widget coin-ids="bitcoin,ethereum,eos,ripple,litecoin" currency="usd" background-color="#ffffff" locale="en" vce-ready=""></coingecko-coin-price-marquee-widget>
+            </div>
 </header>
 <main role="main">
     <div class="mainContainer" id="js-mainContainer">
         <div class="searchContainer" id="js-searchContainer">
             <form id="js-form">
-                <label for="search-term">Get news on your coin:</label>
-                <input type="text" name="search-term" id="js-search-coin" placeholder="bitcoin" required>
-                <input class="goButton" type="submit" value="  Go!  ">
+                <div class="searchBar">
+                    <label for="search-term"></label>
+                    <input type="text" name="search-term" id="js-search-coin" placeholder="Coin News, e.g. 'bitcoin'" required>
+                    <input type="image" src="https://image.flaticon.com/icons/png/512/68/68213.png" alt="search">
+                </div>  
+                <!-- <input class="goButton" type="submit" value="  Go!  "> -->
             </form>
         </div>
         <section class="coinRankContainer" id="js-coinRankContainer"></section>
