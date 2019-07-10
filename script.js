@@ -2,36 +2,17 @@
 
 const coinGeckoURL = 'https://api.coingecko.com/api/v3/coins/markets'
 
-// const stockNewsAPI_Key = 'tminp4dxa2nxmvimhd892g79czm3hwyhglwa0c0v'
-
 const newsAPI_Key = "8cab291695294d6f831c8f1116bd0008"
 const newsSearchURL = 'https://newsapi.org/v2/everything'
 
 let searchCoin = ''; 
+let top100Coins = [];
 
-// function to assemble query parameters for the URL
+// function to assemble query parameters for the API URL
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
       .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    //   .map(key => `${key}=${params[key]}`)
     return queryItems.join('&');
-}
-
-//get the homepage display of ranked coins from the CoinGecko API
-function getCoinRanking() {
-    console.log('getCoinRanking ran');
-    const rankingDisplayID = 1;
-   
-    //API parameters
-    const params = {
-        vs_currency: 'usd',
-    }
-    const queryString = formatQueryParams(params);
-    const url = coinGeckoURL + '?' + queryString;
-    
-    console.log('Coin Gecko URL: ' + url);
-
-    dataComms(url, rankingDisplayID);
 }
 
 //function to round numbers to 2 digits
@@ -43,7 +24,6 @@ function roundToTwo(num) {
 //passes in a string containing a big number & returns an rounded & labeled display number
 function bigNumberCrusher(bigNumStr) {
     let bigNumLength = bigNumStr.length;
-    console.log('bigNumLength is ' + bigNumLength);
     if (bigNumLength <= 3) {
         return bigNumStr;
     }
@@ -60,7 +40,7 @@ function bigNumberCrusher(bigNumStr) {
         return decimalAdder(bigNumStr, bigNumLength, 12) + ' T';
     }
     else {
-        console.log('myERROR - bigNumberCrusher function needs updated')
+        console.log('myERROR - bigNumberCrusher function needs updated with Quadrillion')
     }
 }
 
@@ -72,11 +52,25 @@ function decimalAdder(bigNumStr, length, sliceNum) {
     return roundToTwo(decimalNumStr);
 }
 
-bigNumberCrusher('509125456789');
+//get the homepage display of ranked coins from the CoinGecko API
+function getCoinRanking() {
+    // console.log('getCoinRanking ran');
+    const rankingDisplayID = 1;
+   
+    //API parameters
+    const params = {
+        vs_currency: 'usd',
+    }
+    const queryString = formatQueryParams(params);
+    const url = coinGeckoURL + '?' + queryString;
+    // console.log('Coin Gecko URL: ' + url);
+    dataComms(url, rankingDisplayID);
+}
 
+//displays the top 10 coins on the homepage
 function displayCoinRanking(responseJson) {
-    console.log('displayCoinRanking ran');
-    console.log(responseJson);
+    // console.log('displayCoinRanking ran');
+    // console.log(responseJson);
     emptyContainers();
     $('#js-coinRankContainer').append(`<h2>Top 10 Coins by Market Capitalization</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 10; i++) {
@@ -85,7 +79,6 @@ function displayCoinRanking(responseJson) {
         let coinSymbol = `${responseJson[i].symbol}`.toUpperCase();
         let currentPrice = roundToTwo(`${responseJson[i].current_price}`);
         let percentChange = roundToTwo(`${responseJson[i].price_change_percentage_24h}`);
-        // add function to evaluate mktCap & totalVol and return 4 digit numbers with appropriate label
         let mktCap = bigNumberCrusher(`${responseJson[i].market_cap}`)
         let totalVol = bigNumberCrusher(`${responseJson[i].total_volume}`);
         
@@ -118,9 +111,17 @@ function displayCoinRanking(responseJson) {
     }
 }
 
-//get DOM display data from the NewsAPI
+//displays the coin trend chart above the current news articles
+function displayCoinWidgetChart() {
+    $('#js-coinGeckoWidget').append(
+        `<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
+        <coingecko-coin-price-chart-widget currency="usd" coin-id="${searchCoin}" locale="en" height="300">
+        </coingecko-coin-price-chart-widget>`) 
+}
+
+//get the most current articles from the NewsAPI
 function getCoinNews() {
-    console.log('getCoinNews ran');
+    // console.log('getCoinNews ran');
     const newsDisplayID = 2;
 
     //newsAPI parameters
@@ -132,9 +133,7 @@ function getCoinNews() {
     
     const queryString = formatQueryParams(params);
     const url = newsSearchURL + '?' + queryString;
-
-    console.log('News URL: ' + url);
-
+    // console.log('News URL: ' + url);
     const options = {
         headers: new Headers({
             "X-Api-Key": newsAPI_Key})
@@ -143,15 +142,11 @@ function getCoinNews() {
         dataComms(url, newsDisplayID, options);
 }
 
-//display the coinGecko widget with top articles from newsAPI based on user entered coin
+//displays 15 most current articles from the NewsAPI
 function displayCoinNews(responseJson) {
-    console.log('displayCoinNews ran');
-    console.log(responseJson);
-    $('#js-form').append('<a class="homeButton" href="#" onClick="location.reload()">Home</a>')
-    $('#js-coinGeckoWidget').append(
-            `<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
-            <coingecko-coin-price-chart-widget currency="usd" coin-id="${searchCoin}" locale="en" height="300">
-            </coingecko-coin-price-chart-widget>`)     
+    // console.log('displayCoinNews ran');
+    //console.log(responseJson);
+    $('#js-form').append('<a class="homeButton" href="#" onClick="location.reload()">Home</a>')    
     $('#js-coinNews').append(`<h2>${searchCoin} NEWS</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 15; i++) {
         $('#results-list').append(
@@ -176,24 +171,25 @@ function displayCoinNews(responseJson) {
 
 // API... go-fetch
 function dataComms(url, displayID, options) {
-fetch(url, options)
-.then(response => {
-    if (response.ok) {
-    return response.json();
-    }
-    throw new Error(response.statusText);
-})
-// .then(responseJson => console.log(JSON.stringify(responseJson)))
-.then(responseJson => {
-    if (displayID === 1) {
-        displayCoinRanking(responseJson);
-    }
-    else {displayCoinNews(responseJson);
-    }
-})
-.catch(err => {
-    $('#js-error-message').text(`Something went wrong: ${err.message}`);
-});
+    fetch(url, options)
+    .then(response => {
+        if (response.ok) {
+        return response.json();
+        }
+        throw new Error(response.statusText);
+    })
+    .then(responseJson => {
+        if (displayID === 1) {
+            displayCoinRanking(responseJson);
+            top100Coins = responseJson;
+        }
+        else {displayCoinNews(responseJson);
+        }
+    })
+    .catch(err => {
+        emptyContainers();
+        $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
 }
 
 //function to take user input and pass param(s) to API call functions
@@ -202,26 +198,51 @@ function watchForm() {
         event.preventDefault();
         console.log('the form was submitted');
         searchCoin = $('#js-search-coin').val().toUpperCase();
+        console.log('searchCoin = ' + searchCoin);
         emptyContainers();
-        getCoinNews();
+        checkUserSubmission();
     });
+}
+
+function checkUserSubmission() {
+    let coinMatch = false;
+    for (let i = 0; i < 100; i++) {
+        let coinID = `${top100Coins[i].id}`.toUpperCase();
+        if (searchCoin == coinID) {
+            coinMatch = true;
+        }
+    }
+    if (coinMatch === true) {
+        getCoinNews();
+        displayCoinWidgetChart();
+    }
+    else {
+        $('#js-form').append('<a class="homeButton" href="#" onClick="location.reload()">Home</a>')
+        $('#js-coinGeckoWidget').append(`<div class="errorBlock">
+        <h2>Typo?</h2>
+        <p>We couldn\'t find that coin to display it's trend chart and current news.</p>
+        <p>Check your spelling to get the chart and the most accurate news.</p>
+        </div>`)
+        // console.log('error in checkUserSubmission');
+    }
 }
 
 //handles coin titles that are clicked and calls getCoinNews
 function coinLinkClicked(id) {
     event.preventDefault();
-    console.log('the user clicked a coin link & ID = ' + id);
+    // console.log('the user clicked a coin link & ID = ' + id);
     searchCoin = id;
-    console.log('searchCoin = ' + searchCoin);
+    // console.log('searchCoin = ' + searchCoin);
     emptyContainers();
     getCoinNews();
+    displayCoinWidgetChart();
 }
-
-// waiting...watching for user form submisions
-$(watchForm);
 
 //call the main page API default display
 getCoinRanking();
+
+// waiting...watching for user form submisions
+$(watchForm);
 
 //clear or empty out the DOM for new content
 function emptyContainers() {
@@ -229,6 +250,7 @@ function emptyContainers() {
     $('#js-coinGeckoWidget').empty()
     $('#js-coinNews').empty()
     $('#js-coinRankContainer').empty()
+    $('#js-error-message').empty()
 }
 
 
