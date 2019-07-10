@@ -40,6 +40,40 @@ function roundToTwo(num) {
     console.log('num = ' + num);
 } 
 
+//passes in a string containing a big number & returns an rounded & labeled display number
+function bigNumberCrusher(bigNumStr) {
+    let bigNumLength = bigNumStr.length;
+    console.log('bigNumLength is ' + bigNumLength);
+    if (bigNumLength <= 3) {
+        return bigNumStr;
+    }
+    else if (bigNumLength > 3 && bigNumLength <= 6) {
+        return decimalAdder(bigNumStr, bigNumLength, 3) + ' K';
+    }
+    else if (bigNumLength > 6 && bigNumLength <= 9) {
+        return decimalAdder(bigNumStr, bigNumLength, 6) + ' M';
+    }
+    else if (bigNumLength > 9 && bigNumLength <= 12) {
+        return decimalAdder(bigNumStr, bigNumLength, 9) + ' B';
+    }
+    else if (bigNumLength > 12 && bigNumLength <= 15) {
+        return decimalAdder(bigNumStr, bigNumLength, 12) + ' T';
+    }
+    else {
+        console.log('myERROR - bigNumberCrusher function needs updated')
+    }
+}
+
+//adds a decimal into big number strings at the highest comma separater point
+function decimalAdder(bigNumStr, length, sliceNum) {
+    let firstStr = bigNumStr.slice(0, length - sliceNum);
+    let secondStr = bigNumStr.slice(length - sliceNum);
+    let decimalNumStr = firstStr + '.' + secondStr;
+    return roundToTwo(decimalNumStr);
+}
+
+bigNumberCrusher('509125456789');
+
 function displayCoinRanking(responseJson) {
     console.log('displayCoinRanking ran');
     console.log(responseJson);
@@ -52,8 +86,8 @@ function displayCoinRanking(responseJson) {
         let currentPrice = roundToTwo(`${responseJson[i].current_price}`);
         let percentChange = roundToTwo(`${responseJson[i].price_change_percentage_24h}`);
         // add function to evaluate mktCap & totalVol and return 4 digit numbers with appropriate label
-        // let mktCap = 
-        // let totalVol = 
+        let mktCap = bigNumberCrusher(`${responseJson[i].market_cap}`)
+        let totalVol = bigNumberCrusher(`${responseJson[i].total_volume}`);
         
         $('#results-list').append(
             `<li>
@@ -71,11 +105,11 @@ function displayCoinRanking(responseJson) {
                         </div>
                         <div class="Column2 Row2">
                                 <h5>MKT CAP</h5>
-                                <h5 class="mktCap">${responseJson[i].market_cap}</h5>
+                                <h5 class="mktCap">${mktCap}</h5>
                         </div>
                         <div class="Column3 Row2">
                                 <h5>VOLUME</h5>
-                                <h5 class="volume">${responseJson[i].total_volume}</h5>
+                                <h5 class="volume">${totalVol}</h5>
                         </div>
                     </div>  
                 </div>
@@ -186,7 +220,6 @@ function coinLinkClicked(id) {
 // waiting...watching for user form submisions
 $(watchForm);
 
-
 //call the main page API default display
 getCoinRanking();
 
@@ -197,3 +230,5 @@ function emptyContainers() {
     $('#js-coinNews').empty()
     $('#js-coinRankContainer').empty()
 }
+
+

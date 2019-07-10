@@ -1,6 +1,14 @@
 * { 
     box-sizing: border-box;
-    font-family: 'Helvetica Neue', sans-serif;
+    /* font-family: 'Helvetica Neue', sans-serif; */
+    /* font-family: din-alternate, sans-serif; */
+    /* font-family: din-1451-lt-pro-engschrift, sans-serif; */
+    font-style: normal;
+    font-weight: 400;
+    /* my blue #02579b */
+    /* my gray #939393 */
+    /* my black #111(111) */
+    /* my white #F7F7F7 */
 }
 
 /* html {
@@ -125,7 +133,7 @@ h2 {
 
 .rankNumber {
     text-align: center;
-    font-size: 36px;
+    font-size: 16px;
     font-weight: bold;
     margin: 10px;
 }
