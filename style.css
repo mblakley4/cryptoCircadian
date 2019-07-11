@@ -12,19 +12,17 @@
 /* ----- header styling ------ */
 
 header {
-    height: 130px;
-    /* background-image: linear-gradient(to right, #02579b, #111); */
+    height: 160px;
 }
 
-.headerBackgroundContainer {
-    background-image: url(https://github.com/mblakley4/cryptoCircadian/blob/master/chain_res.jpg?raw=true);
-    background-repeat: repeat-x;
-    background-size: 300px 150px;
-    height: 150px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+.headerCryptoPic {
+    background-image: url(https://github.com/mblakley4/cryptoCircadian/blob/master/crypto%20invest.jpg?raw=true);
+    width: 100%;
+    height: 160px;
+}
+
+.headerMainPic {
+    visibility: hidden;
 }
 
 body {
@@ -33,15 +31,14 @@ body {
 }
 
 h1 {
-    color: #f7f7f7;
-    position: relative;
+    color: #939393;
+    background-image: linear-gradient(to bottom, #111, #02579b);
     width: 100%;
     font-size: 36px;
     font-weight: 600;
-    top: 0px;
-    left: 0px;
     text-align: center;
     padding: 15px;
+    margin: 0;
 }
 
 .coinScroll {
@@ -131,7 +128,7 @@ h2 {
     width: 275px;
     margin: 0 auto;
     margin-bottom: 30px;
-    background-image: linear-gradient(to top, #02579b, #939393, transparent);
+    /* background-image: linear-gradient(to top, #02579b, #939393, transparent); */
 }
 
 .coinLink {
@@ -276,16 +273,51 @@ h5 {
         font-weight: 700;
         font-size: 16px;
     }
-    
+}
+
+
+@media (min-width: 750px) {
+    h1 {
+        position: absolute;
+        top: 15px;
+        color: #f7f7f7;
+        text-align: left;
+        margin-left: 25px;
+        background-image: none;
+        z-index: 6;
+    }
+    .headerMainPic {
+        background-image: url(https://github.com/mblakley4/cryptoCircadian/blob/master/header.png?raw=true);
+        visibility: visible; 
+        width: 100%;
+        max-width: 1200px;
+        height: 100px;
+        position: absolute;
+        top: 0px;
+        z-index: 4;
+    }
+    header {
+        height: 100px;
+        background-color: black;
+        z-index: 2;
+    }
+    .headerCryptoPic {
+        visibility: hidden;
+    }
 }
 
 @media (min-width: 900px) {
     .row {
         display: inline-block;
         vertical-align: top;
-    } 
-    h1 {
-        text-align: left;
-        top: 45px;
-   }
+    }
+}
+
+@media (min-width: 1200px) {
+    .headerMainPic {
+        width: 50%;
+        left: 48%;
+        border-bottom-left-radius: 60px;
+        border-top-left-radius: 60px;
+    }
 }
