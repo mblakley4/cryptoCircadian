@@ -84,25 +84,24 @@ function displayCoinRanking(responseJson) {
         
         $('#results-list').append(
             `<li>
-                <div class="rankNumber">#${responseJson[i].market_cap_rank}</div>
                 <div class="coinTile">
                     <img src="${responseJson[i].image}" class="coinLogo Row1">
                     <div class="top-row-container Row1">
-                        <h3 onClick="coinLinkClicked('${coinName}')" class="coinLink" id="${coinName}">${coinName} (${coinSymbol})</h3>
+                        <h3 onClick="coinLinkClicked('${coinName}')" class="coinLink" id="${coinName}">${responseJson[i].market_cap_rank} - ${coinName} (${coinSymbol})</h3>
                         <h4 class="coinPrice">${currentPrice} USD</h4>
                     </div>
                     <div class="bottom-row-container">
                         <div class="Column1 Row2">
                             <h5>24H%</h5>
-                            <h5 class="priceChange">${percentChange}</h5>
+                            <h5 class="priceChange coinData">${percentChange}</h5>
                         </div>
                         <div class="Column2 Row2">
                                 <h5>MKT CAP</h5>
-                                <h5 class="mktCap">${mktCap}</h5>
+                                <h5 class="mktCap coinData">${mktCap}</h5>
                         </div>
                         <div class="Column3 Row2">
                                 <h5>VOLUME</h5>
-                                <h5 class="volume">${totalVol}</h5>
+                                <h5 class="volume coinData">${totalVol}</h5>
                         </div>
                     </div>  
                 </div>

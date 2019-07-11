@@ -1,8 +1,6 @@
 * { 
     box-sizing: border-box;
-    /* font-family: 'Helvetica Neue', sans-serif; */
     font-family: din-alternate, sans-serif;
-    /* font-family: din-1451-lt-pro-engschrift, sans-serif; */
     font-style: normal;
     font-weight: 400;
     /* my blue #02579b */
@@ -11,38 +9,38 @@
     /* my white #F7F7F7 */
 }
 
-body {
-    /* background-image: linear-gradient(to right, rgb(94, 95, 94, 0.1), rgb(94, 95, 94, 0.9)); */
-    background-color: #939393;
-}
+/* ----- header styling ------ */
 
 header {
-    background-image: url(chain_res.jpg);
-    /* width: 400px; */
-    /* height: 200px; */
-    background-repeat: repeat-x;
+    height: 130px;
+    /* background-image: linear-gradient(to right, #02579b, #111); */
 }
 
-/* .headerPic {
-    width: 100%;
-    height: 200px;
-    max-width: 750px;
-    display: block;
-    margin: 0 auto;
-    border-radius: 2px;
-    box-shadow: 1px 1px 3px black;
-    position: relative;
-} */
+.headerBackgroundContainer {
+    background-image: url(https://github.com/mblakley4/cryptoCircadian/blob/master/chain_res.jpg?raw=true);
+    background-repeat: repeat-x;
+    background-size: 300px 150px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+body {
+    background-image: linear-gradient(#939393, #111);
+    margin: 0;
+}
 
 h1 {
     color: #f7f7f7;
-    position: absolute;
-    display: block;
+    position: relative;
     width: 100%;
+    font-size: 36px;
+    font-weight: 600;
     top: 0px;
     left: 0px;
-    /* text-shadow: 1px 1px whitesmoke; */
-    text-align: left;
+    text-align: center;
     padding: 15px;
 }
 
@@ -63,18 +61,18 @@ h1 {
 }
 
 input[type=text] {
-    background: rgba(32, 30, 30, 0.521);
+    background: #f7f7f7;
     border-radius: 15px;
     font-size: 14px;
     font-weight: 400;
     width: 250px;
     height: 35px;
-    border: 3px solid white;
-    padding: 5px;
+    border: 3px solid #02579b;
+    padding: 15px;
 }
 
 input[type=text]::-webkit-input-placeholder {
-    color: white;
+    color: #939393;
     font-size: 12px;
     font-weight: 200;
 }
@@ -87,12 +85,11 @@ input[type=image] {
 
 h2 {
     text-align: center;
-    font-size: 16px;
-    color: #444;
-    font-weight: 400;
-    letter-spacing: 1px;
-    word-spacing: 3px;
-
+    font-size: 22px;
+    color: #02579b;
+    font-weight: 700;
+    margin-top: 75px;
+    text-shadow: 0.3px 0.3px #111;
 }
 
 .searchContainer {
@@ -103,7 +100,7 @@ h2 {
 .homeButton {
     float: right;
     margin: 10px;
-    color: white;
+    color: #f7f7f7;
     font-weight: 600;
 }
 
@@ -128,29 +125,48 @@ h2 {
 }
 
 .coinTile {
-    border: 1px solid black;
-    border-radius: 5px;
+    background-color: #f7f7f7;
+    border: 2px solid #02579b;
+    border-radius: 20px;
     width: 275px;
     margin: 0 auto;
-}
-
-.rankNumber {
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 10px;
+    margin-bottom: 30px;
+    background-image: linear-gradient(to top, #02579b, #939393, transparent);
 }
 
 .coinLink {
-    color: blue;
+    color: #02579b;
     padding: 15px;
     margin: 15px 0px;
+    font-weight: 600;
+    font-size: 24px;
 }
 
 .coinLink:hover,
 .coinLink:focus {
     text-decoration: underline;
-    cursor: pointer;    
+    cursor: pointer;  
+    color: #939393;  
+}
+
+.coinPrice {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111111;
+    margin: 10px;
+}
+
+.coinData {
+    font-size: 12px;
+    font-weight: 500;
+    margin: 10px;
+    vertical-align: bottom;
+}
+
+h5 {
+    font-weight: 700;
+    font-size: 12px;
+    margin: 10px;
 }
 
 .Row1 {
@@ -159,56 +175,26 @@ h2 {
 
 .Row2 {
     display: inline-block;
-    padding: 15px;
 }
 
 .bottom-row-container {
     display: flex;
     justify-content: space-evenly;
-    border-top: 1px solid black;
+    align-items: center;
+    border-top: 2px solid #111111;
     font-size: 14px;
     text-align: center;
-    color: white;
-    background-image: linear-gradient(rgba(24, 24, 24, 0.1), rgba(24, 24, 24, 0.9));
+    color: #111111;
+}
+
+.Column1, .Column2, .Column3 {
+    flex-basis: 33.3%;
+    height: auto;
 }
 
 .Column2 {
-    border-right: 1px solid black;
-    border-left: 1px solid black;
-}
-
-@media (min-width: 500px) {
-    .coinRankContainer ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .coinTile {
-        width: 400px;
-    }
-    .Row1 {
-        display: inline-block;
-    }
-    .top-row-container {
-        width: 75%;
-    }
-    .coinLogo {
-        float: left;
-    }
-    .bottom-row-container {
-        font-size: 16px;
-    }
-    /* header {
-        display: flex;
-    }
-    h1 {
-        order: 1
-    }
-    .headerChain {
-        order: 2;
-        width: 35%
-    } */
-
+    border-right: 2px solid #111111;
+    border-left: 2px solid #111111;
 }
 
 
@@ -237,14 +223,69 @@ h2 {
     max-width: 600px;
 }
 
+.newsTitle a {
+    color: #02579b;
+}
+
+.newsTitle a:hover,
+.newsTitle:focus {
+    text-decoration: underline;
+    cursor: pointer;  
+    color: #111111;  
+}
+
 .articleDescription {
     padding: 5px;
     max-width: 700px;
+    color: #f7f7f7;
+}
+
+
+
+/* media breaks */
+
+@media (min-width: 500px) {
+    .coinRankContainer ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .coinTile {
+        width: 400px;
+        height: 250px;
+        margin: 12px;
+    }
+    .top-row-container {
+        height: 150px;
+        width: 75%;
+    }
+    .bottom-row-container {
+        height: 100px;
+    }
+    .Row1 {
+        display: inline-block;
+    }
+    .coinLogo {
+        float: left;
+    }
+    .coinData {
+        font-size: 14px;
+        font-weight: 500;
+    }
+    h5 {
+        font-weight: 700;
+        font-size: 16px;
+    }
+    
 }
 
 @media (min-width: 900px) {
     .row {
         display: inline-block;
         vertical-align: top;
-    }
+    } 
+    h1 {
+        text-align: left;
+        top: 45px;
+   }
 }
