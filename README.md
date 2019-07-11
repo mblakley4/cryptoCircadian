@@ -11,14 +11,21 @@ Live Link:  https://mblakley4.github.io/cryptoCircadian/
     -HTML
     -CSS
 
-Home Page Screenshot:
+### Home Page Screenshot:
+
 ![Home](screenshots/ScreenShot_homeGrid.png)
 
-Trend / News Screenshot:
+
+### Trend / News Screenshot:
+
 ![News Page](screenshots/ScreenShot_trend_news.png)
 
-Mobile Home View:
+
+### Mobile Home View:
+
 ![Mobile Tiles](screenshots/ScreenShot_mobileTiles.png)
 
-Mobile Trend View: 
+
+### Mobile Trend View: 
+
 ![Mobile Trend](screenshots/ScreenShot_mobile.png)
