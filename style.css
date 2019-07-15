@@ -350,6 +350,7 @@ footer a:focus {
         height: 100px;
         position: absolute;
         top: 0px;
+        left: 0;
         z-index: 4;
     }
     header {
