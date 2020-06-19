@@ -1,11 +1,14 @@
 'use strict'
 
+// TODO: add loading icon to homepage
+// TODO: add autocomplete to searchCoin
+
 const coinGeckoURL = 'https://api.coingecko.com/api/v3/coins/markets'
 
 const newsAPI_Key = "8cab291695294d6f831c8f1116bd0008"
 const newsSearchURL = 'https://newsapi.org/v2/everything'
 
-let searchCoin = ''; 
+let searchCoin = '';
 let top100Coins = [];
 
 // function to assemble query parameters for the API URL
@@ -19,7 +22,7 @@ function formatQueryParams(params) {
 function roundToTwo(num) {
     return num = Math.round(num * 100) / 100;
     console.log('num = ' + num);
-} 
+}
 
 //passes in a string containing a big number & returns a rounded & labeled display number
 function bigNumberCrusher(bigNumStr) {
@@ -97,7 +100,7 @@ function displayCoinRanking(responseJson) {
                                 <h5>VOLUME</h5>
                                 <h5 class="volume coinData">${totalVol}</h5>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </li>`
         )
@@ -109,7 +112,7 @@ function displayCoinWidgetChart() {
     $('#js-coinGeckoWidget').append(
         `<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
         <coingecko-coin-price-chart-widget currency="usd" coin-id="${searchCoin}" locale="en" height="300">
-        </coingecko-coin-price-chart-widget>`) 
+        </coingecko-coin-price-chart-widget>`)
 }
 
 //get the most current articles from the NewsAPI
@@ -132,7 +135,7 @@ function getCoinNews() {
 
 //displays 15 most current articles from the NewsAPI
 function displayCoinNews(responseJson) {
-    $('#js-form').append('<a class="homeButton" href="#" onClick="location.reload()">Home</a>')    
+    $('#js-form').append('<a class="homeButton" href="#" onClick="location.reload()">Home</a>')
     $('#js-coinNews').append(`<h2>${searchCoin} NEWS</h2><ul id="results-list"></ul>`)
     for (let i = 0; i < 15; i++) {
         $('#results-list').append(
@@ -236,5 +239,3 @@ function emptyContainers() {
     $('#js-coinRankContainer').empty()
     $('#js-error-message').empty()
 }
-
-
