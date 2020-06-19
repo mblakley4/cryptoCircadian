@@ -128,9 +128,10 @@ function getCoinNews() {
     const url = newsSearchURL + '?' + queryString;
     const options = {
         headers: new Headers({
-            "X-Api-Key": newsAPI_Key})
-        };
-        dataComms(url, newsDisplayID, options);
+            "X-Api-Key": newsAPI_Key
+        })
+    };
+    dataComms(url, newsDisplayID, options);
 }
 
 //displays 15 most current articles from the NewsAPI
